@@ -4,44 +4,44 @@ body {
     font-family: "Verdana", "Tahoma", "Trebuchet MS";
 }
 
-.font_logo {
+.navbar {
+    background-color: #202020;
+    display: grid;
+    grid-template-columns: 80px 40% auto;
+    grid-template-rows: 30px;
+}
+
+.div_logo {
+    grid-column: 1 / span 1;
+    grid-row: 1 / span 1;
+    background-color: #333;
+}
+
+.logo_link {
+    color: #e00;
+}
+
+.button_logo {
     text-decoration: none;
     font-family: "Helvetica", "Arial";
     font-size: 26px;
     color: #fff;
 }
 
-.logo {
-    display: inline-block;
-    background-color: #333;
-    padding-top: 2px;
-    padding-bottom: 2px;
-    padding-right: 7px;
-    padding-left: 7px;
-    color: #f00;
-    text-align: center;
-    transition: background-color 0.1s;
-}
-
-.logo:hover {
-    background-color: #444;
-    color: #fff;
+.button_logo:hover {
+    color: #e00;
     transition: color 0.2s;
 }
 
 .search {
-/*    position: relative;
-    top: 0px;
-    left: 0px;*/
-    width: 40%;
-    margin: none;
+    grid-column: 2 / span 1;
+    grid-row: 1 / span 1;
     border: none;
     background-color: #202020;
     color: #fff;
     font-family: inherit;
     font-size: 20px;
-    transition: background-color 0.1s;
-    line-height: 28px;
+    transition: background-color 0.2s;
 }
 
 .search:hover {
@@ -53,8 +53,19 @@ body {
     outline: none;
 }
 
-.navbar {
-    background-color: #202020;
-    display: grid;
-    grid-auto-flow: column;
+.div_login {
+    grid-column: 3 / span 1;
+    grid-row: 1 / span 1;
+    background-color: #333;
+}
+
+.button_login {
+    text-decoration: none;
+    color: #fff;
+    font-size: 20px;
+}
+
+.button_login:hover {
+    color: #e00;
+    transition: 0.2s;
 }
