@@ -4,10 +4,15 @@ body {
     font-family: "Verdana", "Tahoma", "Trebuchet MS";
 }
 
+header {
+    position: sticky;
+    top: 0;
+}
+
 .navbar {
     background-color: #202020;
     display: grid;
-    grid-template-columns: 80px 40% auto;
+    grid-template-columns: 80px auto 40% auto 80px 80px;
     grid-template-rows: 30px;
 }
 
@@ -34,13 +39,15 @@ body {
 }
 
 .search {
-    grid-column: 2 / span 1;
+    grid-column: 3 / span 1;
     grid-row: 1 / span 1;
     border: none;
-    background-color: #202020;
+    background-color: #333;
     color: #fff;
     font-family: inherit;
-    font-size: 20px;
+    font-size: 16px;
+    min-width: 200px;
+    padding: 0 5px;
     transition: background-color 0.2s;
 }
 
@@ -51,10 +58,13 @@ body {
 .search:focus {
     background-color: #505050;
     outline: none;
+    /*grid-column: 2 / 6;
+    grid-row: 1 / span 1;
+    z-index: 1;*/
 }
 
 .div_login {
-    grid-column: 3 / span 1;
+    grid-column: 5 / span 1;
     grid-row: 1 / span 1;
     background-color: #333;
 }
@@ -62,10 +72,82 @@ body {
 .button_login {
     text-decoration: none;
     color: #fff;
-    font-size: 20px;
+    font-size: 16px;
 }
 
 .button_login:hover {
     color: #e00;
     transition: 0.2s;
+}
+
+.div_register {
+    grid-column: 6 / span 1;
+    grid-row: 1 / span 1;
+    background-color: #333;
+}
+
+.button_register {
+    text-decoration: none;
+    color: #fff;
+    font-size: 16px;
+}
+
+.button_register:hover {
+    color: #e00;
+    transition: 0.2s;
+}
+
+.div_post {
+    margin: 10px auto;
+    padding: 5px;
+    width: 60%;
+    height: 100%;
+
+    color: #D7DADC;
+    background-color: #252525;
+
+    border: solid 1px #aaa;
+    border-radius: 5px;
+
+    display: grid;
+    grid-template-columns: 40px auto;
+    grid-template-rows: 20px 20px 20px auto;
+}
+
+.div_post:hover {
+    border-color: #ccc;
+}
+
+.div_post_upvote {
+    grid-column: 1 / span 1;
+    grid-row: 1 / span 1;
+    text-align: center;
+}
+
+.div_post_rating {
+    grid-column: 1 / span 1;
+    grid-row: 2 / span 1;
+    text-align: center;
+}
+
+.div_post_downvote {
+    grid-column: 1 / span 1;
+    grid-row: 3 / span 1;
+    text-align: center;
+}
+
+.div_post_header {
+    grid-column: 2 / span 1;
+    grid-row: 1 / span 3;
+    background-color: #303030;
+}
+
+.div_post_content {
+    grid-column: 2 / span 1;
+    grid-row: 4 / span 1;
+    background-color: #303030;
+}
+
+.post_title {
+    color: #D7DADC;
 }
