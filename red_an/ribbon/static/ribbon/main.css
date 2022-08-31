@@ -1,5 +1,6 @@
 body {
     background-color: #000;
+
     margin: 0;
     font-family: "Verdana", "Tahoma", "Trebuchet MS";
 }
@@ -10,15 +11,17 @@ header {
 }
 
 .navbar {
-    background-color: #202020;
     display: grid;
     grid-template-columns: 80px auto 40% auto 80px 80px;
     grid-template-rows: 30px;
+
+    background-color: #202020;
 }
 
 .div_logo {
     grid-column: 1 / span 1;
     grid-row: 1 / span 1;
+
     background-color: #333;
 }
 
@@ -41,7 +44,9 @@ header {
 .search {
     grid-column: 3 / span 1;
     grid-row: 1 / span 1;
+
     border: none;
+
     background-color: #333;
     color: #fff;
     font-family: inherit;
@@ -66,6 +71,7 @@ header {
 .div_login {
     grid-column: 5 / span 1;
     grid-row: 1 / span 1;
+
     background-color: #333;
 }
 
@@ -83,6 +89,7 @@ header {
 .div_register {
     grid-column: 6 / span 1;
     grid-row: 1 / span 1;
+
     background-color: #333;
 }
 
@@ -97,9 +104,16 @@ header {
     transition: 0.2s;
 }
 
+.button_logo div,
+.button_login div,
+.button_register div {
+    text-align: center;
+    height: 100%;
+    line-height: 30px;
+}
+
 .div_post {
     margin: 10px auto;
-    padding: 5px;
     width: 60%;
     height: 100%;
 
@@ -111,43 +125,128 @@ header {
 
     display: grid;
     grid-template-columns: 40px auto;
-    grid-template-rows: 20px 20px 20px auto;
+    grid-template-rows: 20px 20px 20px auto auto 20px;
 }
 
 .div_post:hover {
-    border-color: #ccc;
+    border-color: #eee;
 }
 
 .div_post_upvote {
     grid-column: 1 / span 1;
     grid-row: 1 / span 1;
+
     text-align: center;
 }
 
 .div_post_rating {
     grid-column: 1 / span 1;
     grid-row: 2 / span 1;
+
     text-align: center;
 }
 
 .div_post_downvote {
     grid-column: 1 / span 1;
     grid-row: 3 / span 1;
+
     text-align: center;
+}
+
+.button_upvote,
+.button_downvote {
+    text-decoration: none;
+    color: inherit;
+    font-size: 20px;
+    line-height: 20px;
+}
+
+.button_upvote:hover {
+    color: #0e0;
+}
+
+.button_downvote:hover {
+    color: #e00;
 }
 
 .div_post_header {
     grid-column: 2 / span 1;
-    grid-row: 1 / span 3;
-    background-color: #303030;
-}
+    grid-row: 1 / span 4;
 
-.div_post_content {
-    grid-column: 2 / span 1;
-    grid-row: 4 / span 1;
+    padding: 5px;
+
+    border-radius: 0 5px 0 0;
+    border-bottom: solid 1px #505050;
+
     background-color: #303030;
 }
 
 .post_title {
+    text-decoration: none;
+    font-weight: bold;
     color: #D7DADC;
+}
+
+.post_group {
+    text-decoration: none;
+    font-size: 10px;
+    color: #fff;
+}
+
+.post_group:hover {
+    text-decoration: underline;
+}
+
+.post_info {
+    font-size: 10px;
+    color: #77797a;
+}
+
+.div_post_content {
+    grid-column: 2 / span 1;
+    grid-row: 5 / span 1;
+
+    padding: 5px;
+
+    background-color: #303030;
+}
+
+.post_content_text {
+    margin: 0;
+}
+
+.div_post_footer {
+    grid-column: 2 / span 1;
+    grid-row: 6 / span 1;
+
+    border-radius: 0 0 5px 0;
+
+    background-color: #303030;
+
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto;
+}
+
+.post_footer_comments {
+    grid-column: 1 / span 1;
+    grid-row: 1 / span 1;
+
+    padding: 0 5px 0 5px;
+    font-size: 10px;
+    line-height: 20px;
+}
+
+.post_footer_comments:hover {
+    background-color: #505050;
+}
+
+.button_comments {
+    text-decoration: none;
+    color: #fff;
+}
+
+.button_comments div {
+    text-align: center;
+    height: 100%;
 }
