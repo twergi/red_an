@@ -1,3 +1,5 @@
 from django.contrib import admin
+from .models import Section, SectionPost
 
-# Register your models here.
+admin.site.register(Section)
+admin.site.register(SectionPost)

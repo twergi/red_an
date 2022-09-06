@@ -1,0 +1,45 @@
+{% extends 'ribbon/base.html' %}
+
+{% block content %}
+
+<head>
+    <title>home</title>
+</head>
+
+<main>
+    {% for post in posts %}
+    <div class="div_post">
+        <div class="div_post_upvote">
+            <a href="" class="button_upvote">&#8679;</a>
+        </div>
+        <div class="div_post_rating">
+            {{ post.rating }}
+        </div>
+        <div class="div_post_downvote">
+            <a href="" class="button_downvote">&#8681;</a>
+        </div>
+        <div class="div_post_header">
+            <a href="" class="post_group">{{ post.section_id }}</a><span class="post_info"> · posted by <a class="post_author" href="{% url 'user' post.profile_id.user_id %}">{{ post.profile_id }}</a>. {{ post.date_published|date:"F j, Y" }}</span>
+            <br>
+            <a href="" class="post_title">{{ post.title }}</a>
+        </div>
+        <div class="div_post_content">
+            <p class="post_content_text">
+                {{ post.content }}
+            </p>
+        </div>
+        <div class="div_post_footer">
+            <div class="post_footer_comments">
+                <a class="button_comments" href="">
+                    <div>
+                        <span>12 сomments</span>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</main>
+
+{% endblock content %}

@@ -1,0 +1,47 @@
+{% extends 'ribbon/base.html' %}
+
+{% block content %}
+
+<head>
+    <title>
+        redan - {{ username }}
+    </title>
+</head>
+
+<main>
+    <div class="div_profile">
+        <div class="div_profile_banner">
+            <img class="profile_banner_image" src="{{ profile.banner_image.url }}">
+        </div>
+        <div class="div_profile_image">
+            <img class="profile_profile_image" src="{{ profile.profile_image.url }}">
+        </div>
+        <div class="div_profile_info">
+            <p class="username">
+                /user/{{ username }}
+            </p>
+            <div style="display: flex; width: 300px; align-content: stretch;">
+                <div class="profile_flex_info">
+                    <h6>
+                        Rating
+                    </h6>
+                    <p>
+                        &#9733; {{ profile.rating }}
+                    </p>
+                </div>
+                <div class="profile_flex_info">
+                    <h6>
+                        Since
+                    </h6>
+                    <p>
+                        &#127874; {{ user.date_joined|date:"F j, Y" }}
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</main>
+
+{% endblock content %}

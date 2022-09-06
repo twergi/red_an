@@ -13,7 +13,7 @@ header {
 .navbar {
     display: grid;
     grid-template-columns: 80px auto 40% auto 80px 80px;
-    grid-template-rows: 30px;
+    grid-template-rows, line-height: 30px;
 
     background-color: #202020;
 }
@@ -38,7 +38,7 @@ header {
 
 .button_logo:hover {
     color: #e00;
-    transition: color 0.2s;
+    /*transition: color 0.2s;*/
 }
 
 .search {
@@ -53,7 +53,7 @@ header {
     font-size: 16px;
     min-width: 200px;
     padding: 0 5px;
-    transition: background-color 0.2s;
+    /*transition: background-color 0.2s;*/
 }
 
 .search:hover {
@@ -63,9 +63,6 @@ header {
 .search:focus {
     background-color: #505050;
     outline: none;
-    /*grid-column: 2 / 6;
-    grid-row: 1 / span 1;
-    z-index: 1;*/
 }
 
 .div_login {
@@ -83,7 +80,7 @@ header {
 
 .button_login:hover {
     color: #e00;
-    transition: 0.2s;
+    /*transition: 0.2s;*/
 }
 
 .div_register {
@@ -101,7 +98,7 @@ header {
 
 .button_register:hover {
     color: #e00;
-    transition: 0.2s;
+    /*transition: 0.2s;*/
 }
 
 .button_logo div,
@@ -115,7 +112,6 @@ header {
 .div_post {
     margin: 10px auto;
     width: 60%;
-    height: 100%;
 
     color: #D7DADC;
     background-color: #252525;
@@ -197,6 +193,15 @@ header {
     text-decoration: underline;
 }
 
+.post_author {
+    text-decoration: none;
+    color: #77797a;
+}
+
+.post_author:hover {
+    text-decoration: underline;
+}
+
 .post_info {
     font-size: 10px;
     color: #77797a;
@@ -249,4 +254,80 @@ header {
 .button_comments div {
     text-align: center;
     height: 100%;
+}
+
+.div_profile {
+    margin: 10px 10px 10px auto;
+    width: 300px;
+
+    color: #D7DADC;
+    background-color: #252525;
+
+    border: solid 1px #aaa;
+    border-radius: 5px;
+
+    display: grid;
+    grid-template-columns: 100px auto;
+    grid-template-rows: 90px, auto;
+}
+
+.div_profile_image {
+    grid-column: 1 / span 1;
+    grid-row: 1 / span 1;
+
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 40px;
+
+    text-align: center;
+}
+
+.profile_profile_image {
+    height: 60px;
+    width: 60px;
+    object-fit: cover;
+
+    border-radius: 50%;
+    background-color: #252525;
+    border: solid #252525 3px;
+}
+
+.div_profile_banner {
+    grid-column: 1 / span 2;
+    grid-row: 1 / span 1;
+
+    height: 90px;
+    width: 300px;
+}
+
+.profile_banner_image {
+    border-radius: 5px 5px 0 0;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.div_profile_info {
+    grid-column: 1 / span 2;
+    grid-row: 2 / span 1;
+}
+
+.username {
+    font-size: 10px;
+    margin-left: 5px;
+}
+
+.profile_flex_info {
+    flex: 1;
+    padding-left: 5px;
+}
+
+.profile_flex_info h6 {
+    margin: 0;
+}
+
+.profile_flex_info p {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: 10px;
 }

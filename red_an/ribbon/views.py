@@ -1,6 +1,11 @@
 from django.shortcuts import render
+from .models import SectionPost
 
 
 def ribbonView(request):
+    posts = SectionPost.objects.all()
 
-    return render(request, 'ribbon/base.html')
+    context = {
+        'posts': posts
+    }
+    return render(request, 'ribbon/ribbon.html', context)
