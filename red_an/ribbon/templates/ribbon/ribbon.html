@@ -32,7 +32,7 @@
             <div class="post_footer_comments">
                 <a class="button_comments" href="">
                     <div>
-                        <span>12 сomments</span>
+                        <span>{{ post.comments_set.all.count }} сomment{{ post.comments_set.all.count|pluralize:'s'}}</span>
                     </div>
                 </a>
 

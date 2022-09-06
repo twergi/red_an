@@ -51,7 +51,7 @@ header {
     color: #fff;
     font-family: inherit;
     font-size: 16px;
-    min-width: 200px;
+    min-width: 300px;
     padding: 0 5px;
     /*transition: background-color 0.2s;*/
 }
@@ -112,6 +112,7 @@ header {
 .div_post {
     margin: 10px auto;
     width: 60%;
+    min-width: 400px;
 
     color: #D7DADC;
     background-color: #252525;
@@ -256,8 +257,22 @@ header {
     height: 100%;
 }
 
+.div_profile_layout {
+    display: grid;
+    grid-template-columns: auto 322px;
+    grid-template-rows: auto;
+}
+
+.div_profile_posts {
+    grid-column: 1 / span 1;
+    grid-row: 1 / span 1;
+}
+
 .div_profile {
-    margin: 10px 10px 10px auto;
+    grid-column: 2 / span 1;
+    grid-row: 1 / span 1;
+
+    margin: 10px 10px auto auto;
     width: 300px;
 
     color: #D7DADC;

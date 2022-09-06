@@ -9,39 +9,74 @@
 </head>
 
 <main>
-    <div class="div_profile">
-        <div class="div_profile_banner">
-            <img class="profile_banner_image" src="{{ profile.banner_image.url }}">
-        </div>
-        <div class="div_profile_image">
-            <img class="profile_profile_image" src="{{ profile.profile_image.url }}">
-        </div>
-        <div class="div_profile_info">
-            <p class="username">
-                /user/{{ username }}
-            </p>
-            <div style="display: flex; width: 300px; align-content: stretch;">
-                <div class="profile_flex_info">
-                    <h6>
-                        Rating
-                    </h6>
-                    <p>
-                        &#9733; {{ profile.rating }}
-                    </p>
-                </div>
-                <div class="profile_flex_info">
-                    <h6>
-                        Since
-                    </h6>
-                    <p>
-                        &#127874; {{ user.date_joined|date:"F j, Y" }}
-                    </p>
+    <div class="div_profile_layout">
+        <div class="div_profile">
+            <div class="div_profile_banner">
+                <img class="profile_banner_image" src="{{ profile.banner_image.url }}">
+            </div>
+            <div class="div_profile_image">
+                <img class="profile_profile_image" src="{{ profile.profile_image.url }}">
+            </div>
+            <div class="div_profile_info">
+                <p class="username">
+                    /user/{{ username }}
+                </p>
+                <div style="display: flex; width: 300px; align-content: stretch;">
+                    <div class="profile_flex_info">
+                        <h6>
+                            Rating
+                        </h6>
+                        <p>
+                            &#9733; {{ profile.rating }}
+                        </p>
+                    </div>
+                    <div class="profile_flex_info">
+                        <h6>
+                            Since
+                        </h6>
+                        <p>
+                            &#127874; {{ user.date_joined|date:"F j, Y" }}
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
+        <div class="div_profile_posts">
+            {% for post in posts %}
+            <div class="div_post">
+                <div class="div_post_upvote">
+                    <a href="" class="button_upvote">&#8679;</a>
+                </div>
+                <div class="div_post_rating">
+                    {{ post.rating }}
+                </div>
+                <div class="div_post_downvote">
+                    <a href="" class="button_downvote">&#8681;</a>
+                </div>
+                <div class="div_post_header">
+                    <a href="" class="post_group">{{ post.section_id }}</a><span class="post_info"> · posted by <a class="post_author" href="{% url 'user' post.profile_id.user_id %}">{{ post.profile_id }}</a>. {{ post.date_published|date:"F j, Y" }}</span>
+                    <br>
+                    <a href="" class="post_title">{{ post.title }}</a>
+                </div>
+                <div class="div_post_content">
+                    <p class="post_content_text">
+                        {{ post.content }}
+                    </p>
+                </div>
+                <div class="div_post_footer">
+                    <div class="post_footer_comments">
+                        <a class="button_comments" href="">
+                            <div>
+                                <span>{{ post.comments_set.all.count }} сomment{{ post.comments_set.all.count|pluralize:'s'}}</span>
+                            </div>
+                        </a>
 
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
     </div>
-
 </main>
 
 {% endblock content %}

@@ -13,7 +13,6 @@ class Section(models.Model):
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
     title = models.CharField(max_length=50, unique=True)
     description = models.CharField(max_length=200, blank=True)
-    owner = models.ForeignKey(Profile, on_delete=models.CASCADE)
     image = models.ImageField(upload_to=section_path)
     subscribers = models.ManyToManyField(User, editable=False)
     date_created = models.DateTimeField(auto_now_add=True)
@@ -52,3 +51,24 @@ class SectionPost(models.Model):
 
     def __str__(self):
         return str(self.title)
+
+
+class SectionStaff(models.Model):
+    id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
+    section_id = models.OneToOneField(Section, on_delete=models.CASCADE)
+    owner = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    moderators = models.ManyToManyField(User)
+
+    def __str__(self):
+        return str(self.section_id.title)
+
+
+class Comments(models.Model):
+    id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
+    user_id = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
+    section_post_id = models.ForeignKey(SectionPost, null=True, on_delete=models.SET_NULL)
+    text = models.TextField(max_length=500)
+    date_published = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.user_id.username} on {self.section_post_id.title}'

@@ -45,8 +45,3 @@ class Profile(models.Model):
         else:
             self.banner_image = 'banner/default.png'
             self.save()
-
-
-# class Comments(models.Model):
-#     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
-#     user_id = models.OneToOneField(User, on_delete=models.CASCADE)
