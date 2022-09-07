@@ -10,6 +10,8 @@ header {
     top: 0;
 }
 
+/* NAVBAR */
+
 .navbar {
     display: grid;
     grid-template-columns: 80px auto 40% auto 80px 80px;
@@ -109,6 +111,47 @@ header {
     line-height: 30px;
 }
 
+/* MESSAGES */
+.messages_container {
+    position: absolute;
+    top: 40px;
+    left: 10px;
+}
+
+.alert {
+    color: #fff;
+    padding: 5px;
+    border: solid 1px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.alert_debug {
+    background-color: #303030;
+    border-color: #444;
+}
+
+.alert_info {
+    background-color: #303030;
+    border-color: #444;
+}
+
+.alert_success {
+    background-color: #306030;
+    border-color: #070;
+}
+
+.alert_warning {
+    background-color: #606030;
+    border-color: #770;
+}
+
+.alert_error {
+    background-color: #603030;
+    border-color: #700;
+}
+/* POST */
+
 .div_post {
     margin: 10px auto;
     width: 60%;
@@ -117,7 +160,7 @@ header {
     color: #D7DADC;
     background-color: #252525;
 
-    border: solid 1px #aaa;
+    border: solid 1px #444;
     border-radius: 5px;
 
     display: grid;
@@ -173,7 +216,7 @@ header {
     padding: 5px;
 
     border-radius: 0 5px 0 0;
-    border-bottom: solid 1px #505050;
+    border-bottom: solid 1px #444;
 
     background-color: #303030;
 }
@@ -256,6 +299,8 @@ header {
     text-align: center;
     height: 100%;
 }
+
+/* PROFILE */
 
 .div_profile_layout {
     display: grid;
@@ -345,4 +390,50 @@ header {
     margin-top: 5px;
     margin-bottom: 5px;
     font-size: 10px;
+}
+
+/* LOGIN/REGISTER */
+.div_authenticate {
+    width: 300px;
+    margin: 10px auto auto auto;
+
+    border: solid 1px #444;
+    border-radius: 5px;
+
+    color: #D7DADC;
+    background-color: #252525;
+}
+
+.label {
+    display: block;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.input {
+    display: block;
+
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 278px;
+
+    color: #fff;
+    background-color: #333;
+    border: none;
+}
+
+.input:focus {
+    outline: none;
+    background-color: #505050;
+}
+
+.submit {
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+
+    background-color: #444;
+    color: #D7DADC;
+
+    border: none;
 }

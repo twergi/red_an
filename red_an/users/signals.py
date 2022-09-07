@@ -11,5 +11,4 @@ def createProfile(sender, instance, created, **kwargs):
         Profile.objects.create(
             user_id=user_id,
         )
-    print('User has been created')
 # @receiver(post_save, sender=User)

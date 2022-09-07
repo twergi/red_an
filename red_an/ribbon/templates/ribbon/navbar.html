@@ -8,8 +8,24 @@
             </a>
         </div>
         <input class="search" type="text" placeholder="search" method="POST">
+        {% if request.user.is_authenticated %}
         <div class="div_login">
-            <a class="button_login" href="">
+            <a class="button_login" href="{% url 'user' request.user.username %}">
+                <div>
+                    <span>profile</span>
+                </div>
+            </a>
+        </div>
+        <div class="div_register">
+            <a class="button_register" href="{% url 'logout' %}">
+                <div>
+                    <span>log out</span>
+                </div>
+            </a>
+        </div>
+        {% else %}
+        <div class="div_login">
+            <a class="button_login" href="{% url 'login' %}">
                 <div>
                     <span>log in</span>
                 </div>
@@ -22,5 +38,6 @@
                 </div>
             </a>
         </div>
+        {% endif %}
     </div>
 </header>
