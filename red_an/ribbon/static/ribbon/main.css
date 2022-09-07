@@ -17,6 +17,7 @@ header {
     grid-template-columns: 80px auto 40% auto 80px 80px;
     grid-template-rows, line-height: 30px;
 
+    min-width: 650px;
     background-color: #202020;
 }
 
