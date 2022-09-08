@@ -44,6 +44,18 @@ def loginUser(request):
     return render(request, 'users/login_register.html', context)
 
 
+def registerUser(request):
+    page = 'register'
+
+    if request.user.is_authenticated:
+        return redirect('user', request.user.username)
+
+    context = {
+        'page': page
+    }
+    return render(request, 'users/login_register.html', context)
+
+
 def logoutUser(request):
     logout(request)
     return redirect('ribbon')
