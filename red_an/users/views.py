@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from ribbon.models import SectionPost
 
@@ -50,8 +51,19 @@ def registerUser(request):
     if request.user.is_authenticated:
         return redirect('user', request.user.username)
 
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            return redirect('user', username)
+
+    else:
+        form = UserCreationForm()
+
     context = {
-        'page': page
+        'page': page,
+        'form': form,
     }
     return render(request, 'users/login_register.html', context)
 

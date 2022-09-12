@@ -90,7 +90,10 @@ header {
     grid-column: 6 / span 1;
     grid-row: 1 / span 1;
 
-    background-color: #333;
+    margin: 5px;
+    border-radius: 10px;
+    background-color: #fff;
+    /*background-color: #333;*/
 }
 
 .button_register {
@@ -438,4 +441,22 @@ header {
     color: #D7DADC;
 
     border: none;
+}
+
+
+/* COMMENTS */
+.div_comments {
+    margin: 10px auto;
+    width: 60%;
+    min-width: 400px;
+
+    color: #D7DADC;
+    background-color: #252525;
+
+    border: solid 1px #444;
+    border-radius: 5px;
+}
+
+.div_comments:hover {
+    border-color: #eee;
 }

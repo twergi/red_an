@@ -2,6 +2,13 @@
 {% load crispy_forms_tags %}
 {% block content %}
 
+<head>
+    {% if page == 'login' %}
+    <title>login</title>
+    {% else %}
+    <title>register</title>
+    {% endif %}
+</head>
 
 <div class="div_authenticate">
 <!--     <form>
@@ -9,6 +16,7 @@
         {{ form|crispy }}
         <button class="submit" type="submit">log in</button>
     </form> -->
+    {% if page == 'login' %}
     <form method="POST" action="">
         {% csrf_token %}
         <label class="label">Username</label>
@@ -17,6 +25,13 @@
         <input class="input" type="password" name="password" placeholder="*****">
         <button class="submit" type="submit">log in</button>
     </form>
+    {% else %}
+    <form method="POST" action="">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="submit" type="submit">log in</button>
+    </form>
+    {% endif %}
 </div>
 
 {% endblock content %}
