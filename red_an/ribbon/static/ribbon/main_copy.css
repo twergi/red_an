@@ -2,7 +2,7 @@ body {
     background-color: #000;
 
     margin: 0;
-    font-family: "Trebuchet MS", "Verdana", "Tahoma", sans-serif;
+    font-family: "Verdana", "Tahoma", "Trebuchet MS";
 }
 
 header {
@@ -13,14 +13,18 @@ header {
 /* NAVBAR */
 
 .navbar {
-    display: flex;
-    height: 34px;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 80px auto 40% auto 80px 80px;
+    grid-template-rows, line-height: 30px;
+
     min-width: 650px;
     background-color: #202020;
 }
 
 .div_logo {
+    grid-column: 1 / span 1;
+    grid-row: 1 / span 1;
+
     background-color: #333;
 }
 
@@ -41,6 +45,9 @@ header {
 }
 
 .search {
+    grid-column: 3 / span 1;
+    grid-row: 1 / span 1;
+
     border: none;
 
     background-color: #333;
@@ -62,22 +69,15 @@ header {
 }
 
 .div_login {
-    display: inline-block;
+    grid-column: 5 / span 1;
+    grid-row: 1 / span 1;
+
     background-color: #333;
 }
 
 .button_login {
-    display: inline-flex;
-    background-color: #D7DADC;
-
-    align-items: center;
-    border-radius: 10px;
-    padding: 0 5px 0 5px;
-    font-weight: bold;
-    margin: 2px;
-    height: 30px;
     text-decoration: none;
-    color: #000;
+    color: #fff;
     font-size: 16px;
 }
 
@@ -87,7 +87,9 @@ header {
 }
 
 .div_register {
-    display: inline-block;
+    grid-column: 6 / span 1;
+    grid-row: 1 / span 1;
+
     background-color: #333;
 }
 
