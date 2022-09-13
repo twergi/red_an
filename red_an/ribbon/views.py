@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import SectionPost
+from .models import SectionPost, Section
 
 
 def redirectRibbon(request):
@@ -13,6 +13,21 @@ def ribbonView(request):
         'posts': posts
     }
     return render(request, 'ribbon/ribbon.html', context)
+
+
+def sectionView(request, section_title):
+    section = Section.objects.get(title=section_title)
+    owner = section.sectionstaff.owner
+    moderators = section.sectionstaff.moderators.all()
+
+    posts = SectionPost.objects.filter(section_id=section.id)
+    context = {
+        'section': section,
+        'posts': posts,
+        'owner': owner,
+        'moderators': moderators,
+    }
+    return render(request, 'ribbon/section.html', context)
 
 
 def postView(request, section_title, post_id):

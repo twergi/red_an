@@ -1,8 +1,5 @@
-1. material round design
-2. register form - ui
 3. up/downvote
 4. post creation form
 5. profile setting form
 6. comment form
-7. post view
 8. section view

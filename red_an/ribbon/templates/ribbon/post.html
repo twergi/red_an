@@ -8,31 +8,32 @@
 
 <main>
     <div class="div_post">
-        <div class="div_post_upvote">
-            <a href="" class="button_upvote">&#8679;</a>
-        </div>
         <div class="div_post_rating">
-            {{ post.rating }}
+            <div>
+                <a class="post_up" href="">&#8679;</a>
+            </div>
+            <div>
+                {{ post.rating }}
+            </div>
+            <div>
+                <a class="post_down" href="">&#8681;</a>
+            </div>
         </div>
-        <div class="div_post_downvote">
-            <a href="" class="button_downvote">&#8681;</a>
-        </div>
-        <div class="div_post_header">
-            <a href="" class="post_group">{{ post.section_id }}</a><span class="post_info"> · posted by <a class="post_author" href="{% url 'user' post.profile_id.user_id %}">{{ post.profile_id }}</a>. {{ post.date_published|date:"F j, Y" }}</span>
-            <br>
-            <a href="" class="post_title">{{ post.title }}</a>
-        </div>
-        <div class="div_post_content">
-            <p class="post_content_text">
+        <div class="post_content">
+            <div>
+                <a class="post_main_link" href="{% url 'section' post.section_id.title %}">{{ post.section_id.title }}</a><span class="post_info"> · posted by <a class="post_secondary_link" href="{% url 'user' post.profile_id.user_id %}">{{ post.profile_id }}</a>. {{ post.date_published|date:"F j, Y" }}</span>
+            </div>
+            <div class="div_title">
+                <span class="post_title"">{{ post.title }}</span>
+            </div>
+            <div class="div_bottom_border"></div>
+            <div class="post_text">
                 {{ post.content }}
-            </p>
-        </div>
-        <div class="div_post_footer">
-
+            </div>
         </div>
     </div>
     {% if comments %}
-    <div class="div_comments">
+    <div class="div_comments" id="comments">
         {% for comment in comments %}
         <p>
            {{ comment.user_id.username }} - {{ comment.text }}

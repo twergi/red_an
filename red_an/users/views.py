@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import login, logout, authenticate
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from ribbon.models import SectionPost
+from .forms import CustomUserCreationForm, UserLoginForm
 
 
 def userView(request, username):
@@ -26,22 +26,16 @@ def loginUser(request):
         return redirect('user', request.user.username)
 
     if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        try:
-            user = User.objects.get(username=username)
-        except User.DoesNotExist:
-            messages.error(request, 'username does not exist')
-
-        user = authenticate(request, username=username, password=password)
-
-        if user is not None:
+        form = UserLoginForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password1')
+            user = authenticate(request, username=username, password=password)
             login(request, user)
-            messages.success(request, 'logged in successfully')
-            return redirect(request.GET['next'] if 'next' in request.GET else 'ribbon')
-        else:
-            messages.error(request, 'username or password is incorrect')
-    context = {'page': page}
+            return redirect('user', username)
+    else:
+        form = UserLoginForm()
+    context = {'page': page, 'form': form}
     return render(request, 'users/login_register.html', context)
 
 
@@ -52,14 +46,17 @@ def registerUser(request):
         return redirect('user', request.user.username)
 
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password1')
+            user = authenticate(request, username=username, password=password)
+            login(request, user)
             return redirect('user', username)
 
     else:
-        form = UserCreationForm()
+        form = CustomUserCreationForm()
 
     context = {
         'page': page,

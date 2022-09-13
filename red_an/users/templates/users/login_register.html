@@ -1,5 +1,4 @@
 {% extends 'ribbon/base.html' %}
-{% load crispy_forms_tags %}
 {% block content %}
 
 <head>
@@ -11,25 +10,17 @@
 </head>
 
 <div class="div_authenticate">
-<!--     <form>
-        {% csrf_token %}
-        {{ form|crispy }}
-        <button class="submit" type="submit">log in</button>
-    </form> -->
     {% if page == 'login' %}
     <form method="POST" action="">
         {% csrf_token %}
-        <label class="label">Username</label>
-        <input class="input" type="text" name="username" placeholder="Input here">
-        <label class="label">Password</label>
-        <input class="input" type="password" name="password" placeholder="*****">
-        <button class="submit" type="submit">log in</button>
+        {{ form.as_div }}
+        <button class="submit" type="submit">Log In</button>
     </form>
     {% else %}
     <form method="POST" action="">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button class="submit" type="submit">log in</button>
+        {{ form.as_div }}
+        <button class="submit" type="submit">Register</button>
     </form>
     {% endif %}
 </div>
