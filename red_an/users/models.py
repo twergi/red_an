@@ -5,14 +5,21 @@ import uuid
 from PIL import Image
 
 
+def defaultImage(imageType):
+    if imageType == 'profile':
+        return 'user/profile/default.png'
+    else:
+        return 'user/banner/default.png'
+
+
 class Profile(models.Model):
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
     user_id = models.OneToOneField(User, on_delete=models.CASCADE)
     about = models.CharField(max_length=200, blank=True)
     country = CountryField(blank=True)
     rating = models.IntegerField(default=0)
-    profile_image = models.ImageField(upload_to='profile/', blank=True, default='profile/default.png')
-    banner_image = models.ImageField(upload_to='banner/', blank=True, default='banner/default.png')
+    profile_image = models.ImageField(upload_to='user/profile/', blank=True, default=defaultImage('profile'))
+    banner_image = models.ImageField(upload_to='user/banner/', blank=True, default=defaultImage('banner'))
 
     def __str__(self):
         return str(self.user_id)
@@ -30,7 +37,7 @@ class Profile(models.Model):
             img.close()
 
         else:
-            self.profile_image = 'profile/default.png'
+            self.profile_image = defaultImage('profile')
             self.save()
 
         if self.banner_image:
@@ -43,5 +50,5 @@ class Profile(models.Model):
             banner.close()
 
         else:
-            self.banner_image = 'banner/default.png'
+            self.banner_image = defaultImage('banner')
             self.save()

@@ -7,36 +7,11 @@
 </head>
 
 <main>
+    <div class="ribbon_post_container">
     {% for post in posts %}
-    <div class="div_post">
-        <div class="div_post_rating">
-            <div>
-                <a class="post_up" href="">&#8679;</a>
-            </div>
-            <div>
-                {{ post.rating }}
-            </div>
-            <div>
-                <a class="post_down" href="">&#8681;</a>
-            </div>
-        </div>
-        <div class="post_content">
-            <div>
-                <a class="post_main_link" href="{% url 'section' post.section_id.title %}">{{ post.section_id.title }}</a><span class="post_info"> · posted by <a class="post_secondary_link" href="{% url 'user' post.profile_id.user_id %}">{{ post.profile_id }}</a>. {{ post.date_published|date:"F j, Y" }}</span>
-            </div>
-            <div class="div_title">
-                <a class="post_title" href="{% url 'post' post.section_id.title post.id %}">{{ post.title }}</a>
-            </div>
-            <div class="div_bottom_border"></div>
-            <div class="post_text">
-                {{ post.content }}
-            </div>
-            <div>
-                <a class="post_main_link" href="{% url 'post' post.section_id.title post.id %}#comments">{{ post.comments_set.all.count }} сomment{{ post.comments_set.all.count|pluralize:'s'}}</a>
-            </div>
-        </div>
-    </div>
+    {% include 'ribbon/single-post.html' %}
     {% endfor %}
+    </div>
 </main>
 
 {% endblock content %}

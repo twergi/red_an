@@ -3,44 +3,35 @@
 {% block content %}
 
 <head>
-    <title>{{ post.title }}</title>
+    <title>{{ post.title }} - redan</title>
 </head>
 
 <main>
-    <div class="div_post">
-        <div class="div_post_rating">
-            <div>
-                <a class="post_up" href="">&#8679;</a>
+    <div class="ribbon_post_container">
+        {% include 'ribbon/single-post.html' %}
+
+        {% if comments %}
+        <div class="div_comments" id="comments">
+            <h3 class="post_title div_title bottom_border">Comments</h3>
+            {% for comment in comments %}
+            <div class="comment">
+               <img class="navbar_profile_image div_title" src="{{ comment.user_id.profile.profile_image.url }}">
+               <div style="display: flex; flex-flow: column;">
+                    <div>
+                        <a class="post_main_link" style="font-size: 12px; margin-left: 0px" href="{% url 'user' comment.user_id.username %}">{{ comment.user_id.username }}</a>
+                    </div>
+                    <div style="font-size: 16px; margin-left: 10px;margin-bottom: 5px;">
+                        {{ comment.text }}
+                    </div>
+                    <div style="font-size: 12px;">
+                       &#8679; 0 &#8681;
+                    </div>
+               </div>
             </div>
-            <div>
-                {{ post.rating }}
-            </div>
-            <div>
-                <a class="post_down" href="">&#8681;</a>
-            </div>
+            {% endfor %}
         </div>
-        <div class="post_content">
-            <div>
-                <a class="post_main_link" href="{% url 'section' post.section_id.title %}">{{ post.section_id.title }}</a><span class="post_info"> · posted by <a class="post_secondary_link" href="{% url 'user' post.profile_id.user_id %}">{{ post.profile_id }}</a>. {{ post.date_published|date:"F j, Y" }}</span>
-            </div>
-            <div class="div_title">
-                <span class="post_title"">{{ post.title }}</span>
-            </div>
-            <div class="div_bottom_border"></div>
-            <div class="post_text">
-                {{ post.content }}
-            </div>
-        </div>
+        {% endif %}
     </div>
-    {% if comments %}
-    <div class="div_comments" id="comments">
-        {% for comment in comments %}
-        <p>
-           {{ comment.user_id.username }} - {{ comment.text }}
-        </p>
-        {% endfor %}
-    </div>
-    {% endif %}
 </main>
 
 {% endblock content %}

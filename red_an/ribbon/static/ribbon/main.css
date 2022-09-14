@@ -8,6 +8,7 @@ body {
 header {
     position: sticky;
     top: 0;
+    z-index: 1;
 }
 
 /* NAVBAR */
@@ -28,8 +29,8 @@ header {
     display: inline-flex;
     height: 30px;
 
-    padding: 0 5px 0 5px;
-    margin: 2px 5px 2px 5px;
+    padding: 0 5px;
+    margin: 2px 5px;
     align-items: center;
     border-radius: 12px;
     background-color: #D7DADC;
@@ -75,7 +76,6 @@ header {
     border-radius: 15px;
     border: solid 1px #444;
     background-color: #202020;
-
 }
 
 .navbar_button {
@@ -87,7 +87,7 @@ header {
     background-color: #D7DADC;
 
     margin: 2px 5px 2px 5px;
-    padding: 0 5px 0 5px;
+    padding: 0 5px;
 
     text-decoration: none;
     font-size: 14px;
@@ -141,13 +141,15 @@ header {
 }
 /* POST */
 
+.ribbon_post_container {
+    width: 700px;
+    margin: 0 auto;
+}
+
 .div_post {
     display: flex;
 
-    margin: 10px auto;
-    width: 60%;
-    min-width: 400px;
-
+    margin: 10px;
     color: #D7DADC;
     background-color: #252525;
 
@@ -222,7 +224,7 @@ header {
     margin: 5px;
 }
 
-.div_bottom_border {
+.bottom_border {
     border-bottom: solid 1px #444;
 }
 
@@ -405,9 +407,9 @@ header {
 
 /* COMMENTS */
 .div_comments {
-    margin: 10px auto;
-    width: 60%;
+    margin: 10px;
     min-width: 400px;
+
 
     color: #D7DADC;
     background-color: #252525;
@@ -416,22 +418,44 @@ header {
     border-radius: 5px;
 }
 
-.div_comments:hover {
-    border-color: #eee;
+.comment {
+    display: flex;
+    margin-top: 10px;
 }
 
 /* SECTION */
 .div_section_header {
     display: flex;
     flex-flow: row;
+    justify-content: center;
     min-width: 650px;
 
-    padding: 5px;
+    padding: 10px;
 
     color: #D7DADC;
     background-color: #202020;
+}
 
-    border-bottom: solid 1px #444;
+.section_header_info {
+    display: flex;
+    flex-flow: row;
+}
+
+.section_header_buttons {
+    margin: 0 auto auto 0;
+
+    width: 300px;
+    min-width: 200px;
+}
+
+.section_button {
+    border: none;
+    border-radius: 7px;
+    background-color: #D7DADC;
+
+    font-weight: bold;
+    font-size: inherit;
+    font-family: inherit;
 }
 
 .section_img {
@@ -439,7 +463,8 @@ header {
     border-radius: 5px;
     border: solid 1px #444;
     position: relative;
-    top: -40px
+    background-color: #202020;
+    top: -40px;
 }
 
 .section_banner {
@@ -450,20 +475,21 @@ header {
 
 .section_flex {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
 }
 
+
 .section_posts {
-    padding: 0 10px;
-    width: 100%;
-    margin: 0 auto;
+    width: 700px;
+    min-width: 400px;
+    margin: 0 0 0 auto;
 }
 
 .section_info {
-    /*display: inline-block;*/
-    margin: 10px 10px auto 0;
+    margin: 10px auto auto 0;
 
-    min-width: 230px;
+    width: 300px;
+    min-width: 200px;
 
     padding: 5px;
     color: #D7DADC;
@@ -471,4 +497,11 @@ header {
 
     border: solid 1px #444;
     border-radius: 5px;
+}
+
+.section_description {
+    max-height: 200px;
+    overflow: auto;
+    font-size: 12px;
+    margin-left: 5px;
 }
