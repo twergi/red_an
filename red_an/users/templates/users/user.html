@@ -10,6 +10,11 @@
 
 <main>
     <div class="div_profile_layout">
+        <div class="div_profile_posts">
+            {% for post in posts %}
+            {% include 'ribbon/single-post.html' %}
+            {% endfor %}
+        </div>
         <div class="div_profile">
             <div class="div_profile_banner">
                 <img class="profile_banner_image" src="{{ profile.banner_image.url }}">
@@ -40,11 +45,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="div_profile_posts">
-            {% for post in posts %}
-            {% include 'ribbon/single-post.html' %}
-            {% endfor %}
         </div>
     </div>
 </main>

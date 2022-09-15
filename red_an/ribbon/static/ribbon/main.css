@@ -242,21 +242,18 @@ header {
 /* PROFILE */
 
 .div_profile_layout {
-    display: grid;
-    grid-template-columns: auto 322px;
-    grid-template-rows: auto;
+    display: flex;
+    justify-content: center;
 }
 
 .div_profile_posts {
-    grid-column: 1 / span 1;
-    grid-row: 1 / span 1;
+    width: 700px;
+    margin-right: 0;
+    margin-left: auto;
 }
 
 .div_profile {
-    grid-column: 2 / span 1;
-    grid-row: 1 / span 1;
-
-    margin: 10px 10px auto auto;
+    margin: 10px auto auto 0;
     width: 300px;
 
     color: #D7DADC;
@@ -421,6 +418,20 @@ header {
 .comment {
     display: flex;
     margin-top: 10px;
+}
+
+.flex_column {
+    display: flex;
+    flex-flow: column;
+}
+
+.comment_text {
+    font-size: 16px;
+    margin: 5px 10px;
+}
+
+.comment_subbuttons {
+    font-size: 12px;
 }
 
 /* SECTION */

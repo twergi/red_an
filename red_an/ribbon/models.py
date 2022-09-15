@@ -4,6 +4,7 @@ from users.models import Profile
 import uuid
 from colorfield.fields import ColorField
 from PIL import Image
+from ribbon.utils import square_crop
 
 
 def section_image_path(instance, filename):
@@ -31,13 +32,20 @@ class Section(models.Model):
     def save(self, **kwargs):
         super().save()
 
-        img = Image.open(self.image.path)
+        square_crop(self.image.path)
 
-        if img.height > 300 or img.width > 300:
-            output_size = (300, 300)
-            img.thumbnail(output_size)
-            img.save(self.image.path)
-        img.close()
+        if self.banner:
+            img = Image.open(self.banner.path)
+
+            if img.width > 1920:
+                output_size = (1920, 1920)
+                img.thumbnail(output_size)
+                img.save(self.banner.path)
+
+            if img.height > 300:
+                img = img.crop((0, 0, img.width, 300))
+                img.save(self.banner.path)
+            img.close()
 
 
 def sectionpost_path(instance, filename):
@@ -52,10 +60,10 @@ class SectionPost(models.Model):
     rating = models.IntegerField(default=0)
     image = models.ImageField(upload_to=sectionpost_path, null=True, blank=True)
     content = models.TextField(max_length=4000, blank=True)
-    date_published = models.DateField(auto_now_add=True)
+    date_published = models.DateTimeField(auto_now_add=True)
 
     class Meta():
-        ordering = ['-rating']
+        ordering = ['-rating', '-date_published']
 
     def __str__(self):
         return str(self.title)
@@ -78,6 +86,9 @@ class Comments(models.Model):
     text = models.TextField(max_length=500)
     rating = models.IntegerField(default=0, editable=False)
     date_published = models.DateTimeField(auto_now_add=True)
+
+    class Meta():
+        ordering = ['-rating', 'date_published']
 
     def __str__(self):
         return f'{self.user_id.username} on {self.section_post_id.title}'

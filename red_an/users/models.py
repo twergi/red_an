@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django_countries.fields import CountryField
 import uuid
 from PIL import Image
+from ribbon.utils import square_crop
 
 
 def defaultImage(imageType):
@@ -28,13 +29,7 @@ class Profile(models.Model):
         super().save()
 
         if self.profile_image:
-            img = Image.open(self.profile_image.path)
-
-            if img.height > 300 or img.width > 300:
-                output_size = (300, 300)
-                img.thumbnail(output_size)
-                img.save(self.profile_image.path)
-            img.close()
+            square_crop(self.profile_image.path)
 
         else:
             self.profile_image = defaultImage('profile')

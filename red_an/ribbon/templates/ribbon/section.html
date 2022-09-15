@@ -8,7 +8,9 @@
 
 <main>
     <div class="section_banner" style="background-color: {{ section.banner_color  }};">
-
+        {% if section.banner %}
+            <img style="display: block; margin-left: auto; margin-right: auto" src="{{ section.banner.url }}">
+        {% endif %}
     </div>
     <div class="div_section_header bottom_border">
         <div class="section_header_info section_posts">
@@ -16,21 +18,21 @@
                 <img class="section_img" src="{{ section.image.url }}">
             </div>
             <div>
-                <div>
+                <div class="post_title div_title">
                     {{ section.title }}
                 </div>
                 {% if section.short_description %}
-                <div>
+                <div class="section_description">
                     {{ section.short_description }}
                 </div>
                 {% endif %}
             </div>
         </div>
         <div class="section_header_buttons">
-            <button class="section_button">Join</button>
-            <div>
+            <div class="div_title">
                 {{ section.subscribers.count }} subscriber{{ section.subscribers.count|pluralize:'s'}}
             </div>
+            <button class="section_button div_title">Join</button>
         </div>
     </div>
     <div class="section_flex">

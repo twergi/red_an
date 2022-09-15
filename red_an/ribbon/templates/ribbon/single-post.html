@@ -18,6 +18,9 @@
             <a class="post_title" href="{% url 'post' post.section_id.title post.id %}">{{ post.title }}</a>
         </div>
         <div class="bottom_border"></div>
+        {% if post.image %}
+            <img style="width: 100%" src="{{ post.image.url }}">
+        {% endif %}
         <div class="post_text">
             {{ post.content|linebreaksbr }}
         </div>

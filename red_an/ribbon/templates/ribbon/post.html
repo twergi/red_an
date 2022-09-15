@@ -16,15 +16,15 @@
             {% for comment in comments %}
             <div class="comment">
                <img class="navbar_profile_image div_title" src="{{ comment.user_id.profile.profile_image.url }}">
-               <div style="display: flex; flex-flow: column;">
+               <div class="flex_column">
                     <div>
-                        <a class="post_main_link" style="font-size: 12px; margin-left: 0px" href="{% url 'user' comment.user_id.username %}">{{ comment.user_id.username }}</a>
+                        <a class="post_main_link" style="font-size: 12px; margin-left: 0px" href="{% url 'user' comment.user_id.username %}">{{ comment.user_id.username }}</a><span class="post_info"> at {{ comment.date_published|date:"H:i, d.m.Y" }}</span>
                     </div>
-                    <div style="font-size: 16px; margin-left: 10px;margin-bottom: 5px;">
+                    <div class="comment_text">
                         {{ comment.text }}
                     </div>
-                    <div style="font-size: 12px;">
-                       &#8679; 0 &#8681;
+                    <div class="comment_subbuttons">
+                       &#8679; {{ comment.rating }} &#8681; reply
                     </div>
                </div>
             </div>
