@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Sum
 from django.contrib.auth.models import User
 from django_countries.fields import CountryField
 import uuid
@@ -47,3 +48,9 @@ class Profile(models.Model):
         else:
             self.banner_image = defaultImage('banner')
             self.save()
+
+    def updateRating(self):
+        posts = self.sectionpost_set.all()
+        rating = posts.aggregate(Sum('rating'))['rating__sum']
+        self.rating = rating
+        self.save

@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
 
     'colorfield',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [

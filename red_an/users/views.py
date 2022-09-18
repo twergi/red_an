@@ -28,7 +28,7 @@ def loginUser(request):
     if request.method == 'POST':
         form = UserLoginForm(request.POST)
         if form.is_valid():
-            username = form.cleaned_data.get('username')
+            username = form.cleaned_data.get('username').lower()
             password = form.cleaned_data.get('password1')
             user = authenticate(request, username=username, password=password)
             login(request, user)
@@ -48,9 +48,11 @@ def registerUser(request):
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
+            user = form.save(commit=False)
+            user.username = user.username.lower()
             password = form.cleaned_data.get('password1')
+            username = user.username
+            user.save()
             user = authenticate(request, username=username, password=password)
             login(request, user)
             return redirect('user', username)

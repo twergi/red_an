@@ -22,6 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('ribbon.urls')),
     path('user/', include('users.urls')),
+    path('api/', include('api.urls')),
 ]
 
 if settings.DEBUG:

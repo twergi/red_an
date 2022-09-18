@@ -68,6 +68,13 @@ class SectionPost(models.Model):
     def __str__(self):
         return str(self.title)
 
+    def updateRating(self):
+        reviews = self.postreview_set.all()
+        upVotes = reviews.filter(value='up').count()
+        downVotes = reviews.filter(value='down').count()
+        self.rating = upVotes - downVotes
+        self.save
+
 
 class SectionStaff(models.Model):
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
@@ -92,3 +99,21 @@ class Comments(models.Model):
 
     def __str__(self):
         return f'{self.user_id.username} on {self.section_post_id.title}'
+
+
+class postReview(models.Model):
+    VOTE_TYPE = (
+        ('up', 'Upvote'),
+        ('down', 'Downvote'),
+    )
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    post = models.ForeignKey(SectionPost, on_delete=models.CASCADE)
+    value = models.CharField(max_length=200, choices=VOTE_TYPE)
+    created = models.DateTimeField(auto_now_add=True)
+    id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
+
+    # class Meta:
+    #     unique_together = [['owner', 'post']]
+
+    def __str__(self):
+        return f'{self.value} by {self.owner} on {self.post}'

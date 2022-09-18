@@ -27,7 +27,7 @@ class CustomUserCreationForm(UserCreationForm):
         super(CustomUserCreationForm, self).__init__(*args, **kwargs)
         self.fields['username'].widget.attrs.update({
             'placeholder': 'Enter your username',
-            'title': 'From 5 to 150 characters. Letters, digits and @/./+/-/_ only.'
+            'title': 'From 5 to 150 characters. Letters, digits and @/./+/-/_ only. Case insensitive'
         })
         self.fields['password1'].widget.attrs.update({
             'placeholder': '*****',
