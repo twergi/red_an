@@ -7,4 +7,5 @@ urlpatterns = [
     path('sections/<str:section_id>', views.getSection),
     path('sections/<str:section_id>/posts', views.getPosts),
     path('sections/<str:section_id>/posts/<str:post_id>', views.getPost),
+    path('sections/<str:section_id>/posts/<str:post_id>/vote', views.postVote),
 ]
