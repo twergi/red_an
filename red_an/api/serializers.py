@@ -5,32 +5,35 @@ from ribbon.models import Section, SectionPost, SectionStaff
 class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = SectionPost
-        fields = '__all__'
+        fields = [
+            'id',
+            'title',
+            'rating',
+            'section_id',
+            'date_published'
+        ]
 
 
 class SectionSerializer(serializers.ModelSerializer):
-    staff = ''
-
     class Meta:
         model = Section
         fields = [
             'id',
             'title',
-            'short_description',
-            'description',
             'date_created'
         ]
 
 
-class SectionStaffSerializer(serializers.ModelSerializer):
-    section = SectionSerializer(many=False)
+class UserSerializer(serializers.Serializer):
+    id = serializers.IntegerField()
+    username = serializers.CharField()
 
-    class Meta:
-        model = SectionStaff
-        fields = [
-            'section',
-            'owner',
-            'moderators',
-        ]
 
-# class SectionAndStaffSerializer
+class SectionStaffSerializer(serializers.Serializer):
+    id = serializers.UUIDField()
+    title = serializers.CharField()
+    short_description = serializers.CharField()
+    description = serializers.CharField()
+    owner = UserSerializer(many=False)
+    moderators = UserSerializer(many=True)
+    date_created = serializers.DateTimeField()

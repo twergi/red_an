@@ -1,13 +1,13 @@
 <div class="div_post">
     <div class="div_post_rating">
         <div>
-            <a class="post_up" href="">&#8679;</a>
+            <span class="post_vote" data-value="up" data-id="{{ post.id }}">&#8679;</span>
         </div>
         <div>
             {{ post.rating }}
         </div>
         <div>
-            <a class="post_down" href="">&#8681;</a>
+            <span class="post_vote" data-value="down" data-id="{{ post.id }}">&#8681;</span>
         </div>
     </div>
     <div class="post_content">

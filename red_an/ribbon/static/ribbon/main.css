@@ -171,18 +171,14 @@ header {
     text-align: center;
 }
 
-.div_post_rating a {
+.div_post_rating span {
     text-decoration: none;
     color: inherit;
     font-size: 20px;
 }
 
-.post_up:hover {
-    color: #0e0;
-}
-
-.post_down:hover {
-    color: #e00;
+.post_vote:hover {
+    color: #fff;
 }
 
 .post_content {

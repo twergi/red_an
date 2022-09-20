@@ -101,7 +101,7 @@ class Comments(models.Model):
         return f'{self.user_id.username} on {self.section_post_id.title}'
 
 
-class postReview(models.Model):
+class PostReview(models.Model):
     VOTE_TYPE = (
         ('up', 'Upvote'),
         ('down', 'Downvote'),
