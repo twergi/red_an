@@ -324,7 +324,7 @@ header {
     font-size: 10px;
 }
 
-/* LOGIN/REGISTER */
+/* USER FORMS */
 .div_authenticate {
     width: 50%;
     min-width: 300px;
@@ -344,11 +344,12 @@ header {
     font-size: 20px;
 }
 
+
 #id_email,
+#id_about,
 #id_username,
 #id_password1,
 #id_password2 {
-    /*display: block;*/
 
     width: calc(100% - 20px);
     padding: 10px;
@@ -361,7 +362,21 @@ header {
     border: none;
 }
 
+#id_country {
+    width: 100%;
+    padding: 10px 5px;
+
+    border-radius: 10px;
+
+    font-size: inherit;
+    color: #fff;
+    background-color: #333;
+    border: none;
+}
+
 #id_email::placeholder,
+#id_about::placeholder,
+#id_country::placeholder,
 #id_username::placeholder,
 #id_password1::placeholder,
 #id_password2::placeholder {

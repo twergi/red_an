@@ -10,22 +10,20 @@ def ribbonView(request):
     posts = SectionPost.objects.all()
 
     context = {
-        'posts': posts
+        'posts': posts,
     }
     return render(request, 'ribbon/ribbon.html', context)
 
 
 def sectionView(request, section_title):
     section = Section.objects.get(title=section_title)
-    owner = section.sectionstaff.owner
-    moderators = section.sectionstaff.moderators.all()
+    owner = section.owner
 
     posts = SectionPost.objects.filter(section_id=section.id)
     context = {
         'section': section,
         'posts': posts,
         'owner': owner,
-        'moderators': moderators,
     }
     return render(request, 'ribbon/section.html', context)
 

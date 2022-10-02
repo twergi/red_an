@@ -33,8 +33,7 @@ def getSection(request, section_id):
         'title': section.title,
         'short_description': section.short_description,
         'description': section.description,
-        'owner': section.sectionstaff.owner.user_id,
-        'moderators': section.sectionstaff.moderators,
+        'owner': section.owner.user_id,
         'date_created': section.date_created,
     }
     serializer = SectionStaffSerializer(context, many=False)

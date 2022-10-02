@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from .models import Profile
-from django.db.models.signals import post_save, post_delete
+from rest_framework.authtoken.models import Token
+from django.db.models.signals import post_save, pre_delete
 from django.dispatch import receiver
 
 
@@ -11,4 +12,21 @@ def createProfile(sender, instance, created, **kwargs):
         Profile.objects.create(
             user_id=user_id,
         )
-# @receiver(post_save, sender=User)
+
+
+@receiver(post_save, sender=User)
+def createToken(sender, instance, created, **kwargs):
+    if created:
+        Token.objects.create(user=instance)
+
+
+@receiver(pre_delete, sender=User)
+def deleteProfile(sender, instance, **kwargs):
+    profile = Profile.objects.get(user_id=instance)
+    profile.delete()
+
+
+@receiver(pre_delete, sender=User)
+def deleteToken(sender, instance, **kwargs):
+    token = Token.objects.get(user_id=instance)
+    token.delete()

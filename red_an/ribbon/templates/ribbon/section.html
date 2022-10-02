@@ -54,12 +54,6 @@
                 owner<br>
                 <a class="post_main_link" href="{% url 'user' owner %}">{{ owner }}</a>
             </div>
-            <div>
-                moderators:<br>
-                {% for moderator in moderators %}
-                    <a class="post_main_link" href="{% url 'user' moderator %}">{{ moderator }}</a><br>
-                {% endfor %}
-            </div>
         </div>
     </div>
 

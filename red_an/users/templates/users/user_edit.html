@@ -1,0 +1,13 @@
+{% extends 'ribbon/base.html' %}
+
+{% block content %}
+<div class="div_authenticate">
+    <form method="POST" action="" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ user_form.as_div }}
+        {{ profile_form.as_div }}
+        <button class="submit" type="submit">Save</button>
+    </form>
+</div>
+
+{% endblock content %}

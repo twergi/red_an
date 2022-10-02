@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from ribbon.models import Section, SectionPost, SectionStaff
+from ribbon.models import Section, SectionPost
 
 
 class PostSerializer(serializers.ModelSerializer):
@@ -35,5 +35,4 @@ class SectionStaffSerializer(serializers.Serializer):
     short_description = serializers.CharField()
     description = serializers.CharField()
     owner = UserSerializer(many=False)
-    moderators = UserSerializer(many=True)
     date_created = serializers.DateTimeField()

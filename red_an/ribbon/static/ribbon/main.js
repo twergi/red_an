@@ -5,7 +5,8 @@ function clickVote(element) {
     fetch(`http://127.0.0.1:8000/api/sections/${section_id}/posts/${post_id}/vote`, {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': user_token
         },
         body: JSON.stringify({ 'value': vote})
     })

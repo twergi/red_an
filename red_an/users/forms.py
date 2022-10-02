@@ -1,6 +1,9 @@
 from django import forms
+from django.forms import ModelForm
 from django.contrib.auth import authenticate
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+from .models import Profile
 
 
 class UserLoginForm(forms.Form):
@@ -43,3 +46,34 @@ class CustomUserCreationForm(UserCreationForm):
         })
 
     field_order = ['username', 'email', 'password1', 'password2']
+
+
+class UserEditForm(ModelForm):
+    class Meta:
+        model = User
+        fields = ['username', 'email']
+
+    def __init__(self, *args, **kwargs):
+        super(UserEditForm, self).__init__(*args, **kwargs)
+        self.fields['username'].widget.attrs.update({
+            'placeholder': 'Enter your username',
+            'title': 'From 5 to 150 characters. Letters, digits and @/./+/-/_ only. Case insensitive'
+        })
+
+        self.fields['email'].widget.attrs.update({
+            'placeholder': 'Enter your email address',
+            'title': 'example@email.com'
+        })
+
+
+class ProfileEditForm(ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['about', 'country', 'profile_image', 'banner_image']
+
+    def __init__(self, *args, **kwargs):
+        super(ProfileEditForm, self).__init__(*args, **kwargs)
+        self.fields['about'].widget.attrs.update({
+            'placeholder': 'Information about yourself',
+            'title': 'Up to 200 characters'
+        })

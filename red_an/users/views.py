@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.models import User
 from ribbon.models import SectionPost
-from .forms import CustomUserCreationForm, UserLoginForm
+from .forms import CustomUserCreationForm, UserLoginForm, UserEditForm, ProfileEditForm
 
 
 def userView(request, username):
@@ -70,3 +71,24 @@ def registerUser(request):
 def logoutUser(request):
     logout(request)
     return redirect('ribbon')
+
+
+@login_required(login_url='login')
+def editUser(request):
+    user = request.user
+    user_form = UserEditForm(instance=user)
+    profile_form = ProfileEditForm(instance=user.profile)
+    if request.method == 'POST':
+        user_form = UserEditForm(request.POST, instance=user)
+        profile_form = ProfileEditForm(request.POST, request.FILES, instance=user.profile)
+        print(user_form.is_valid())
+        print(profile_form.is_valid())
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            return redirect('user', user.username)
+    context = {
+        'user_form': user_form,
+        'profile_form': profile_form,
+    }
+    return render(request, 'users/user_edit.html', context)

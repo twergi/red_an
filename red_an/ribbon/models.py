@@ -23,6 +23,7 @@ class Section(models.Model):
     image = models.ImageField(upload_to=section_image_path)
     banner = models.ImageField(upload_to=section_banner_path, blank=True)
     banner_color = ColorField()
+    owner = models.ForeignKey(Profile, on_delete=models.CASCADE)
     subscribers = models.ManyToManyField(User, editable=False)
     date_created = models.DateTimeField(auto_now_add=True)
 
@@ -74,16 +75,6 @@ class SectionPost(models.Model):
         downVotes = reviews.filter(value='down').count()
         self.rating = upVotes - downVotes
         self.save
-
-
-class SectionStaff(models.Model):
-    id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
-    section_id = models.OneToOneField(Section, on_delete=models.CASCADE)
-    owner = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    moderators = models.ManyToManyField(User)
-
-    def __str__(self):
-        return str(self.section_id.title)
 
 
 class Comments(models.Model):
