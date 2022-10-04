@@ -350,7 +350,6 @@ header {
 #id_username,
 #id_password1,
 #id_password2 {
-
     width: calc(100% - 20px);
     padding: 10px;
 
@@ -390,6 +389,18 @@ header {
 #id_password2:focus {
     outline: none;
     background-color: #505050;
+}
+
+.edit_profile {
+    background-color: #333;
+    border-radius: 10px;
+}
+
+.edit_profile img {
+    max-height: 100px;
+    display: block;
+
+    margin: 0 auto;
 }
 
 .errorlist {

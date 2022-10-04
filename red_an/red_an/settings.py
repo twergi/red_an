@@ -42,10 +42,13 @@ INSTALLED_APPS = [
     'ribbon.apps.RibbonConfig',
     'users.apps.UsersConfig',
 
+    'django.forms',
     'colorfield',
     'rest_framework',
     'rest_framework.authtoken',
 ]
+
+FORM_RENDERER = 'django.forms.renderers.TemplatesSetting'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -62,7 +65,7 @@ ROOT_URLCONF = 'red_an.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR)],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

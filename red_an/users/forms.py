@@ -3,6 +3,7 @@ from django.forms import ModelForm
 from django.contrib.auth import authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from django_countries.fields import CountryField
 from .models import Profile
 
 
@@ -66,7 +67,14 @@ class UserEditForm(ModelForm):
         })
 
 
+class CustomClearableFileInput(forms.ClearableFileInput):
+    template_name = 'ribbon/widgets/customclearablefileinput.html'
+
+
 class ProfileEditForm(ModelForm):
+    profile_image = forms.ImageField(widget=CustomClearableFileInput, required=False)
+    banner_image = forms.ImageField(widget=CustomClearableFileInput, required=False)
+
     class Meta:
         model = Profile
         fields = ['about', 'country', 'profile_image', 'banner_image']
@@ -75,5 +83,5 @@ class ProfileEditForm(ModelForm):
         super(ProfileEditForm, self).__init__(*args, **kwargs)
         self.fields['about'].widget.attrs.update({
             'placeholder': 'Information about yourself',
-            'title': 'Up to 200 characters'
+            'title': 'Up to 200 characters',
         })
