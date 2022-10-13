@@ -1,10 +1,18 @@
 from django.urls import path
-from .views import redirectRibbon, ribbonView, postView, sectionView
+from . import views
 
 
 urlpatterns = [
-    path('', redirectRibbon),
-    path('ribbon/', ribbonView, name='ribbon'),
-    path('ribbon/<str:section_title>/', sectionView, name='section'),
-    path('ribbon/<str:section_title>/<post_id>/', postView, name='post'),
+    path('', views.redirectRibbon),
+    path('ribbon/', views.ribbonView, name='ribbon'),
+    path('vote/', views.votePOST),
+    path('sections/', views.sectionsView, name='sections'),
+    path('sections/create/', views.SectionCreate, name='section_create'),
+    path('sections/<str:section_title>/', views.sectionView, name='section'),
+    path('sections/<str:section_title>/edit/', views.SectionEdit, name='section_edit'),
+    path('sections/<str:section_title>/delete/', views.SectionDelete, name='section_delete'),
+    path('sections/<str:section_title>/post/create/', views.postCreate, name='post_create'),
+    path('sections/<str:section_title>/post/<post_id>/', views.postView, name='post'),
+    path('sections/<str:section_title>/post/<post_id>/edit/', views.postEdit, name='post_edit'),
+    path('sections/<str:section_title>/post/<post_id>/delete/', views.postDelete, name='post_delete'),
 ]

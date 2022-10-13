@@ -11,16 +11,18 @@
 
 <div class="div_authenticate">
     {% if page == 'login' %}
+    <span>Don't have an account? <a class="red_link" href="{% url 'register' %}">Register</a></span>
     <form method="POST" action="">
         {% csrf_token %}
         {{ form.as_div }}
-        <button class="submit" type="submit">Log In</button>
+        <button class="submit-btn" type="submit">Log In</button>
     </form>
     {% else %}
+    <span>Already have an account? <a class="red_link" href="{% url 'login' %}">Log In</a></span>
     <form method="POST" action="">
         {% csrf_token %}
         {{ form.as_div }}
-        <button class="submit" type="submit">Register</button>
+        <button class="submit-btn" type="submit">Register</button>
     </form>
     {% endif %}
 </div>

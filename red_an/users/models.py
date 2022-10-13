@@ -1,6 +1,7 @@
 from django.db import models
 from django.db.models import Sum
 from django.contrib.auth.models import User
+from rest_framework.authtoken.models import Token
 from django_countries.fields import CountryField
 import uuid
 from PIL import Image
@@ -19,6 +20,7 @@ class Profile(models.Model):
     user_id = models.OneToOneField(User, on_delete=models.CASCADE)
     about = models.CharField(max_length=200, blank=True)
     country = CountryField(blank=True)
+    drf_token = models.CharField(max_length=50, blank=True, null=True)
     rating = models.IntegerField(default=0)
     profile_image = models.ImageField(upload_to='user/profile/', blank=True, default=defaultImage('profile'))
     banner_image = models.ImageField(upload_to='user/banner/', blank=True, default=defaultImage('banner'))
@@ -28,6 +30,10 @@ class Profile(models.Model):
 
     def save(self, **kwargs):
         super().save()
+
+        if self.drf_token is None:
+            self.drf_token = Token.objects.get(user=self.user_id).key
+            self.save()
 
         if self.profile_image:
             square_crop(self.profile_image.path)
@@ -49,8 +55,17 @@ class Profile(models.Model):
             self.banner_image = defaultImage('banner')
             self.save()
 
-    def updateRating(self):
+    def update_token(self):
+        self.drf_token = Token.objects.get(user=self.user_id).key
+        self.save()
+
+    def update_rating(self):
         posts = self.sectionpost_set.all()
-        rating = posts.aggregate(Sum('rating'))['rating__sum']
-        self.rating = rating
+        comments = self.comment_set.all()
+        rating_posts = posts.aggregate(Sum('rating'))['rating__sum']
+        if rating_posts is not None:
+            self.rating += rating_posts
+        rating_comments = comments.aggregate(Sum('rating'))['rating__sum']
+        if rating_comments is not None:
+            self.rating += rating_comments
         self.save

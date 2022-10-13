@@ -1,0 +1,71 @@
+{% extends 'ribbon/base.html' %}
+
+{% block content %}
+<head>
+    <title>
+        sections - redan
+    </title>
+</head>
+
+{% if user_sections %}
+<div class="ribbon_post_container">
+    <div class="div_post flex_column">
+        <span class="post_title div_title">Your subscriptions</span>
+
+        {% for section in user_sections %}
+        <div class="div_title section_header_info div_post">
+            <div>
+                <img style="display: block" class="profile_profile_image" src="{{ section.image.url }}">
+            </div>
+            <div class="ml-5">
+                <div>
+                    <a class="post_title" href="{% url 'section' section %}"> {{ section.title }} </a>
+                    <br>
+                    <div class="section_description ml-0">
+                        {% if section.short_description %}
+                        {{ section.short_description }}
+                        <br>
+                        {% endif %}
+                        Subscribers: {{ section.subscribers.count }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+</div>
+{% endif %}
+
+<div class="ribbon_post_container">
+    <div class="div_post flex_column">
+        <span class="post_title div_title">All Sections</span>
+        <div class="div_title">
+            <a class="submit-btn cancel-btn a-as-btn" href="{% url 'section_create' %}">Create New</a>
+        </div>
+
+        {% for section in all_sections %}
+        <div class="div_title section_header_info div_post">
+            <div>
+                <img style="display: block" class="profile_profile_image" src="{{ section.image.url }}">
+            </div>
+            <div class="ml-5">
+                <div>
+                    <a class="post_title" href="{% url 'section' section %}"> {{ section.title }} </a>
+                    <br>
+                    <div class="section_description ml-0">
+                        {% if section.short_description %}
+                        {{ section.short_description }}
+                        <br>
+                        {% endif %}
+                        Subscribers: {{ section.subscribers.count }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+{% endblock content %}

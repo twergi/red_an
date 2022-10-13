@@ -3,7 +3,6 @@ from django.forms import ModelForm
 from django.contrib.auth import authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from django_countries.fields import CountryField
 from .models import Profile
 
 
@@ -19,6 +18,15 @@ class UserLoginForm(forms.Form):
         if user is None:
             self.add_error('username', 'username or password are incorrect')
         return data
+
+    def __init__(self, *args, **kwargs):
+        super(UserLoginForm, self).__init__(*args, **kwargs)
+        self.fields['username'].widget.attrs.update({
+            'placeholder': 'username'
+        })
+        self.fields['password1'].widget.attrs.update({
+            'placeholder': '*****'
+        })
 
 
 class CustomUserCreationForm(UserCreationForm):
@@ -65,6 +73,8 @@ class UserEditForm(ModelForm):
             'placeholder': 'Enter your email address',
             'title': 'example@email.com'
         })
+
+        self.fields['username'].help_text = None
 
 
 class CustomClearableFileInput(forms.ClearableFileInput):

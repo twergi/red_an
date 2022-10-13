@@ -3,7 +3,7 @@
 {% block content %}
 
 <head>
-    <title>home</title>
+    <title>home - redan</title>
 </head>
 
 <main>
@@ -11,6 +11,13 @@
     {% for post in posts %}
     {% include 'ribbon/single-post.html' %}
     {% endfor %}
+
+    {% if not posts %}
+    {% include 'ribbon/empty-post.html' %}
+    {% endif %}
+
+    {% include 'ribbon/pagination.html' %}
+
     </div>
 </main>
 

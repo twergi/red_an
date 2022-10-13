@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from ribbon.models import Section, SectionPost
+from ribbon.models import Section, SectionPost, Comment
 
 
 class PostSerializer(serializers.ModelSerializer):
@@ -36,3 +36,14 @@ class SectionStaffSerializer(serializers.Serializer):
     description = serializers.CharField()
     owner = UserSerializer(many=False)
     date_created = serializers.DateTimeField()
+
+
+class CommentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Comment
+        fields = [
+            'id',
+            'profile_id',
+            'section_post_id',
+            'rating',
+        ]

@@ -3,7 +3,7 @@
 {% block content %}
 
 <head>
-    <title>{{ section }}</title>
+    <title>{{ section }} - redan</title>
 </head>
 
 <main>
@@ -26,13 +26,28 @@
                     {{ section.short_description }}
                 </div>
                 {% endif %}
+                {% if request.user.profile == section.owner %}
+                <div class="section_description">
+                    <a class="post_main_link ml-0" href="{% url 'section_edit' section.title %}">edit section</a>
+                </div>
+                {% endif %}
             </div>
         </div>
         <div class="section_header_buttons">
             <div class="div_title">
                 {{ section.subscribers.count }} subscriber{{ section.subscribers.count|pluralize:'s'}}
             </div>
-            <button class="section_button div_title">Join</button>
+            <form method="POST" action="">
+                {% csrf_token %}
+                <input type="text" name="subscription" hidden>
+                {% if is_subscriber %}
+                <a class="submit-btn cancel-btn a-as-btn" href="{% url 'post_create' section.title %}">New post</a>
+                <button type="submit" class="section_button div_title a-as-btn p-5 logo_link">Leave</button>
+                {% else %}
+                <button type="submit" class="section_button div_title a-as-btn p-5 logo_link">Join</button>
+                {% endif %}
+            </form>
+
         </div>
     </div>
     <div class="section_flex">
@@ -40,6 +55,9 @@
             {% for post in posts %}
                 {% include 'ribbon/single-post.html' %}
             {% endfor %}
+            {% if not posts %}
+            {% include 'ribbon/empty-post.html' %}
+            {% endif %}
         </div>
         <div class="section_info">
             {% if section.description %}

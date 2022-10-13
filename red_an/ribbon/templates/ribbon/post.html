@@ -10,27 +10,39 @@
     <div class="ribbon_post_container">
         {% include 'ribbon/single-post.html' %}
 
-        {% if comments %}
         <div class="div_comments" id="comments">
             <h3 class="post_title div_title bottom_border">Comments</h3>
+            <div class="m-5">
+                {% if request.user.is_authenticated %}
+                <form method="POST" action="">
+                    {% csrf_token %}
+                    <input type="text" name="comment" hidden>
+                    {{ form }}
+                    <button class="submit-btn cancel-btn" type="submit">Post</button>
+                </form>
+                {% else %}
+                <span class="">Please, <a class="red_link" href="{% url 'login' %}?next={% url 'post' post.section_id post.id %}">login</a> to comment</span>
+                {% endif %}
+            </div>
+            {% if comments %}
             {% for comment in comments %}
             <div class="comment">
-               <img class="navbar_profile_image div_title" src="{{ comment.user_id.profile.profile_image.url }}">
+               <img class="navbar_profile_image div_title" src="{{ comment.profile_id.profile_image.url }}">
                <div class="flex_column">
                     <div>
-                        <a class="post_main_link" style="font-size: 12px; margin-left: 0px" href="{% url 'user' comment.user_id.username %}">{{ comment.user_id.username }}</a><span class="post_info"> at {{ comment.date_published|date:"H:i, d.m.Y" }}</span>
+                        <a class="post_main_link" style="font-size: 12px; margin-left: 0px" href="{% url 'user' comment.profile_id.user_id.username %}">{{ comment.profile_id.user_id.username }}</a><span class="post_info"> at {{ comment.date_published|date:"H:i, F j, Y" }}</span>
                     </div>
                     <div class="comment_text">
                         {{ comment.text }}
                     </div>
                     <div class="comment_subbuttons">
-                       &#8679; {{ comment.rating }} &#8681; reply
+                       <span id="comment-{{ comment.id }}-up" class="comment_vote pointer" data-value="up" data-section_id="{{ post.section_id.id }}" data-post_id="{{ post.id }}" data-comment_id="{{ comment.id }}">&#8679; </span><span id="comment-{{ comment.id }}-rating">{{ comment.rating }} </span><span id="comment-{{ comment.id }}-down" class="comment_vote pointer" data-value="down" data-section_id="{{ post.section_id.id }}" data-post_id="{{ post.id }}" data-comment_id="{{ comment.id }}">&#8681;</span>
                     </div>
                </div>
             </div>
             {% endfor %}
+            {% endif %}
         </div>
-        {% endif %}
     </div>
 </main>
 

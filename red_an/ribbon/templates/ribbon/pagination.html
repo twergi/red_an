@@ -1,0 +1,41 @@
+{% if posts.has_other_pages %}
+    <div class="div_profile_layout">
+
+        {% if posts.has_previous %}
+        <a class="submit-btn a-as-btn cancel-btn m-5 page-btn" href="?page={{ posts.previous_page_number }}" data-page="{{ posts.previous_page_number }}">Previous</a>
+        {% endif %}
+
+        {% for page in page_range %}
+
+            {% if page == posts.number %}
+            <a class="submit-btn a-as-btn cancel-btn bgrnd-r m-5 page-btn" href="?page={{ page }}" data-page="{{ page }}">{{ page }}</a>
+            {% else %}
+            <a class="submit-btn a-as-btn cancel-btn m-5 page-btn" href="?page={{ page }}" data-page="{{ page }}">{{ page }}</a>
+            {% endif %}
+
+        {% endfor %}
+
+        {% if posts.has_next %}
+        <a class="submit-btn a-as-btn cancel-btn m-5 page-btn" href="?page={{ posts.next_page_number }}" data-page="{{ posts.next_page_number }}">Next</a>
+        {% endif %}
+
+    </div>
+{% endif %}
+
+<script type="text/javascript">
+    let searchForm = document.getElementById('searchForm')
+    let pageLinks = document.getElementsByClassName('page-btn')
+
+    if (searchForm) {
+        for (let i=0; i < pageLinks.length; i++) {
+            pageLinks[i].addEventListener('click', function (element) {
+                element.preventDefault()
+
+                let page = this.dataset.page
+                searchForm.innerHTML += `<input value="${page}"" name="page" hidden>`
+                searchForm.submit()
+            })
+        }
+    }
+
+</script>

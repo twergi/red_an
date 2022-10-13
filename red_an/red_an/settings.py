@@ -26,7 +26,10 @@ SECRET_KEY = 'django-insecure-1)(zg_4e3vrv&vl_ajsmiipq3m2pree!h28u)3v%c1jcfxa%&#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '127.0.0.1',
+    'localhost'
+]
 
 
 # Application definition
@@ -42,6 +45,7 @@ INSTALLED_APPS = [
     'ribbon.apps.RibbonConfig',
     'users.apps.UsersConfig',
 
+    'corsheaders',
     'django.forms',
     'colorfield',
     'rest_framework',
@@ -58,6 +62,12 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
+]
+
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:8000',
 ]
 
 ROOT_URLCONF = 'red_an.urls'
@@ -80,6 +90,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'red_an.wsgi.application'
 
+
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases

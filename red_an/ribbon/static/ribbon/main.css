@@ -69,8 +69,8 @@ header {
 
 .navbar_profile_image {
     display: inline-flex;
-    height: 28px;
-    width: 28px;
+    height: 24px;
+    width: 24px;
     object-fit: cover;
 
     border-radius: 15px;
@@ -178,7 +178,11 @@ header {
 }
 
 .post_vote:hover {
-    color: #fff;
+    color: #e00;
+}
+
+.voted {
+    color: #e00!important;
 }
 
 .post_content {
@@ -349,7 +353,8 @@ header {
 #id_about,
 #id_username,
 #id_password1,
-#id_password2 {
+#id_password2,
+.input {
     width: calc(100% - 20px);
     padding: 10px;
 
@@ -378,7 +383,8 @@ header {
 #id_country::placeholder,
 #id_username::placeholder,
 #id_password1::placeholder,
-#id_password2::placeholder {
+#id_password2::placeholder,
+.input::placeholder {
     color: #666;
 }
 
@@ -386,7 +392,8 @@ header {
 #id_email:focus,
 #id_username:focus,
 #id_password1:focus,
-#id_password2:focus {
+#id_password2:focus,
+.input:focus {
     outline: none;
     background-color: #505050;
 }
@@ -397,7 +404,7 @@ header {
 }
 
 .edit_profile img {
-    max-height: 100px;
+    max-width: 450px;
     display: block;
 
     margin: 0 auto;
@@ -411,7 +418,7 @@ header {
     color: #aa0000;
 }
 
-.submit {
+.submit-btn {
     margin-top: 10px;
     background-color: #444;
     padding: 5px;
@@ -420,9 +427,31 @@ header {
     font-family: inherit;
     font-size: inherit;
 
+    cursor: pointer;
     border: none;
 }
 
+.save-btn:hover {
+    background-color: #494;
+}
+
+.cancel-btn:hover {
+    background-color: #555;
+}
+
+.a-as-btn {
+    text-decoration: none;
+    appearance: button;
+}
+
+.delete-btn {
+    float: right;
+    background-color: #744;
+}
+
+.delete-btn:hover {
+    background-color: #944;
+}
 
 /* COMMENTS */
 .div_comments {
@@ -448,8 +477,12 @@ header {
 }
 
 .comment_text {
-    font-size: 16px;
+    font-size: 14px;
     margin: 5px 10px;
+}
+
+.comment_vote:hover {
+    color: #e00;
 }
 
 .comment_subbuttons {
@@ -483,13 +516,16 @@ header {
 
 .section_button {
     border: none;
-    border-radius: 7px;
+    border-radius: 10px;
     background-color: #D7DADC;
 
     font-weight: bold;
     font-size: inherit;
     font-family: inherit;
+
+    cursor: pointer;
 }
+
 
 .section_img {
     height: 100px;
@@ -537,4 +573,62 @@ header {
     overflow: auto;
     font-size: 12px;
     margin-left: 5px;
+}
+
+.mt-0 {
+    margin-top: 0;
+}
+
+.ml-0 {
+    margin-left: 0;
+}
+
+.mb-0 {
+    margin-bottom: 0;
+}
+
+.ml-5 {
+    margin-left: 5px;
+}
+
+.m-5 {
+    margin: 5px;
+}
+
+.pt-5 {
+    padding-top: 5px;
+}
+.pr-5 {
+    padding-right: 5px;
+}
+.pb-5 {
+    padding-bottom: 5px;
+}
+.pl-5 {
+    padding-left: 5px;
+}
+
+.p-5{
+    padding: 5px;
+}
+
+.red_link {
+    text-decoration: none;
+    color: red;
+}
+
+.red_link:hover {
+    text-decoration: underline;
+}
+
+.bgrnd-r {
+    background-color: #e00;
+}
+
+.page-btn {
+
+}
+
+.pointer {
+    cursor: pointer;
 }

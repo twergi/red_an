@@ -1,14 +1,33 @@
 {% extends 'ribbon/base.html' %}
 
 {% block content %}
+<head>
+    <title>
+        edit {{ request.user }} - redan
+    </title>
+</head>
+
 <div class="div_authenticate">
+    {% if page == 'edit' %}
     <form method="POST" action="" enctype="multipart/form-data">
         {% csrf_token %}
+        <input type="text" name="edit_user" hidden>
         {{ user_form.as_div }}
 
         {{ profile_form.as_div }}
-        <button class="submit" type="submit">Save</button>
+        <button class="submit-btn save-btn" type="submit">Save</button>
+        <a class="submit-btn cancel-btn a-as-btn" href="{% url 'user' request.user.username %}">Cancel</a>
+        <a class="submit-btn delete-btn a-as-btn" href="{% url 'delete_user' %}">Delete</a>
     </form>
+    {% elif page == 'delete' %}
+    <form method="POST" action="">
+        {% csrf_token %}
+        <input type="text" name="delete_user" hidden>
+        <h3>Delete your account?</h3>
+        <button class="submit-btn delete-btn" style="float: none;" type="submit">Yes, delete account</button>
+        <a class="submit-btn cancel-btn a-as-btn" href="{% url 'user' request.user.username %}">Cancel</a>
+    </form>
+    {% endif %}
 </div>
 
 {% endblock content %}

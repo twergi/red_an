@@ -24,7 +24,8 @@
 {% block content %}
 {% endblock content %}
 <script type="text/javascript">
-    let user_token = "{{ user_token }}"
+    let user_token = "{{ request.user.profile.drf_token }}"
+    let user_username = "{{ request.user.username }}"
 </script>
 <script type="text/javascript" src="{% static 'ribbon/main.js' %}"></script>
 

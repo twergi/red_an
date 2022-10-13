@@ -14,9 +14,12 @@
             {% for post in posts %}
             {% include 'ribbon/single-post.html' %}
             {% endfor %}
+
             {% if not posts %}
             {% include 'ribbon/empty-post.html' %}
             {% endif %}
+
+            {% include 'ribbon/pagination.html' %}
         </div>
         <div class="div_profile">
             <div class="div_profile_banner">
@@ -29,9 +32,18 @@
                 <p class="username">
                     /user/{{ username }}
                 </p>
+                {% if profile.about %}
+                <p class="username">
+                    <span>About:</span>
+                    <br>
+                    <span>
+                        {{ profile.about }}
+                    </span>
+                </p>
+                {% endif %}
                 {% if request.user == profile.user_id %}
                 <p class="username">
-                    <a class="post_main_link" href="{% url 'edit_user' %}">edit profile</a>
+                    <a class="post_main_link ml-0" href="{% url 'edit_user' %}">edit profile</a>
                 </p>
                 {% endif %}
                 <div style="display: flex; width: 300px; align-content: stretch;">

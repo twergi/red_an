@@ -1,0 +1,34 @@
+{% extends 'ribbon/base.html' %}
+
+{% block content %}
+<head>
+    <title>
+        {% if page == 'create' %}
+        create post
+        {% elif page == 'edit' %}
+        edit post {{ post.title }}
+        {% elif page == 'delete' %}
+        delete post {{ post.title }}
+        {% endif %} - redan
+    </title>
+</head>
+
+<div class="div_authenticate">
+    <form method="POST" action="" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_div }}
+        {% if page == 'create' %}
+        <button class="submit-btn save-btn" type="submit">Create</button>
+        <a class="submit-btn cancel-btn a-as-btn" href="{% url 'section' section.title %}">Cancel</a>
+        {% elif page == 'edit' %}
+        <button class="submit-btn save-btn" type="submit">Save</button>
+        <a class="submit-btn cancel-btn a-as-btn" href="{% url 'post' section.title post.id %}">Cancel</a>
+        <a class="submit-btn delete-btn a-as-btn" href="{% url 'post_delete' section.title post.id %}">Delete</a>
+        {% elif page == 'delete' %}
+        <h3>Delete post?</h3>
+        <button class="submit-btn delete-btn" style="float: none;" type="submit">Delete</button>
+        <a class="submit-btn cancel-btn a-as-btn" href="{% url 'post' section.title post.id %}">Cancel</a>
+        {% endif %}
+    </form>
+</div>
+{% endblock content %}

@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 from users.models import Profile
 import uuid
-from colorfield.fields import ColorField
 from PIL import Image
 from ribbon.utils import square_crop
 
@@ -22,7 +21,7 @@ class Section(models.Model):
     description = models.CharField(max_length=500, blank=True)
     image = models.ImageField(upload_to=section_image_path)
     banner = models.ImageField(upload_to=section_banner_path, blank=True)
-    banner_color = ColorField()
+    banner_color = models.TextField(max_length=7, null=False, default='#FFFFFF')
     owner = models.ForeignKey(Profile, on_delete=models.CASCADE)
     subscribers = models.ManyToManyField(User, editable=False)
     date_created = models.DateTimeField(auto_now_add=True)
@@ -69,27 +68,12 @@ class SectionPost(models.Model):
     def __str__(self):
         return str(self.title)
 
-    def updateRating(self):
+    def update_rating(self):
         reviews = self.postreview_set.all()
         upVotes = reviews.filter(value='up').count()
         downVotes = reviews.filter(value='down').count()
         self.rating = upVotes - downVotes
-        self.save
-
-
-class Comments(models.Model):
-    id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
-    user_id = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
-    section_post_id = models.ForeignKey(SectionPost, null=True, on_delete=models.SET_NULL)
-    text = models.TextField(max_length=500)
-    rating = models.IntegerField(default=0, editable=False)
-    date_published = models.DateTimeField(auto_now_add=True)
-
-    class Meta():
-        ordering = ['-rating', 'date_published']
-
-    def __str__(self):
-        return f'{self.user_id.username} on {self.section_post_id.title}'
+        self.save()
 
 
 class PostReview(models.Model):
@@ -103,8 +87,48 @@ class PostReview(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
 
-    # class Meta:
-    #     unique_together = [['owner', 'post']]
+    class Meta:
+        unique_together = [['owner', 'post']]
 
     def __str__(self):
         return f'{self.value} by {self.owner} on {self.post}'
+
+
+class Comment(models.Model):
+    id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
+    profile_id = models.ForeignKey(Profile, null=True, on_delete=models.CASCADE)
+    section_post_id = models.ForeignKey(SectionPost, null=True, blank=True, on_delete=models.CASCADE)
+    text = models.TextField(max_length=500)
+    rating = models.IntegerField(default=0, editable=False)
+    date_published = models.DateTimeField(auto_now_add=True)
+
+    class Meta():
+        ordering = ['-rating', 'date_published']
+
+    def __str__(self):
+        return f'{self.profile_id.user_id.username} on {self.section_post_id.title}'
+
+    def update_rating(self):
+        reviews = self.commentreview_set.all()
+        upVotes = reviews.filter(value='up').count()
+        downVotes = reviews.filter(value='down').count()
+        self.rating = upVotes - downVotes
+        self.save()
+
+
+class CommentReview(models.Model):
+    VOTE_TYPE = (
+        ('up', 'Upvote'),
+        ('down', 'Downvote'),
+    )
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
+    value = models.CharField(max_length=200, choices=VOTE_TYPE)
+    created = models.DateTimeField(auto_now_add=True)
+    id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
+
+    class Meta:
+        unique_together = [['owner', 'comment']]
+
+    def __str__(self):
+        return f'{self.value} by {self.owner} on {self.comment}'

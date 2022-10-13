@@ -3,12 +3,17 @@
         <a class="navbar_button_logo" href="{% url 'ribbon' %}">
             <span>red</span><span class="logo_link">an</span>
         </a>
-        <input class="search" type="text" placeholder="search" method="POST">
+        <form id="searchForm" method="GET" action="{% url 'ribbon' %}">
+            <input class="search" type="text" placeholder="search posts" name="search_posts" value="{{ search_posts }}" method="POST">
+        </form>
         <div style="display: flex; align-items: center;">
+            <a class="navbar_button" href="{% url 'sections' %}">
+                Sections
+            </a>
             {% if request.user.is_authenticated %}
-            <img class="navbar_profile_image" src="{{ request.user.profile.profile_image.url }}">
             <a class="navbar_button" href="{% url 'user' request.user.username %}">
-                Profile
+                <img class="navbar_profile_image" src="{{ request.user.profile.profile_image.url }}">
+                <span class="ml-5">Profile<span>
             </a>
             <a class="navbar_button" href="{% url 'logout' %}">
                 Sign Out
