@@ -15,14 +15,13 @@ Is an entertainment web application that allows people to create communities and
 - Profile rating based on posts and comments
 
 ## Technologies
-- Python
+- Python (Django Framework)
 - CSS
 - HTML
 - JavaScript
 
 ## Additional Python modules
 - Pillow
-- Django
 - Django Rest Framework
 
 ## Usage
