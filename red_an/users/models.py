@@ -62,10 +62,13 @@ class Profile(models.Model):
     def update_rating(self):
         posts = self.sectionpost_set.all()
         comments = self.comment_set.all()
+        true_rating = 0
+
         rating_posts = posts.aggregate(Sum('rating'))['rating__sum']
         if rating_posts is not None:
-            self.rating += rating_posts
+            true_rating += rating_posts
         rating_comments = comments.aggregate(Sum('rating'))['rating__sum']
         if rating_comments is not None:
-            self.rating += rating_comments
-        self.save
+            true_rating += rating_comments
+        self.rating = true_rating
+        self.save()

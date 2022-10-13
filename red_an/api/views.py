@@ -64,6 +64,7 @@ def postVote(request, section_id, post_id):
     post = SectionPost.objects.get(id=post_id)
     user = request.user
     data = request.data
+    owner = post.profile_id
 
     vote_rating = {'up': 1, 'down': -1}
 
@@ -89,9 +90,9 @@ def postVote(request, section_id, post_id):
         delta_rating = vote_rating[data['value']]
 
     post.rating += delta_rating
-    user.profile.rating += delta_rating
+    owner.rating += delta_rating
     post.save()
-    user.profile.save()
+    owner.save()
     serializer = PostSerializer(post, many=False)
     print(serializer.data)
     return Response(serializer.data)
@@ -103,6 +104,7 @@ def commentVote(request, section_id, post_id, comment_id):
     comment = Comment.objects.get(id=comment_id)
     user = request.user
     data = request.data
+    owner = comment.profile_id
 
     vote_rating = {'up': 1, 'down': -1}
 
@@ -128,8 +130,8 @@ def commentVote(request, section_id, post_id, comment_id):
         delta_rating = vote_rating[data['value']]
 
     comment.rating += delta_rating
-    comment.profile_id.rating += delta_rating
-    comment.profile_id.save()
+    owner.rating += delta_rating
+    owner.save()
     comment.save()
     serializer = CommentSerializer(comment, many=False)
     return Response(serializer.data)
